@@ -211,7 +211,7 @@ int main()//int argc, char** argv)
 		//else {
 		//	cout << "Could not open or find the image" << std::endl;
 		//}
-
+		
 		//OpenAL Stuff-----------------------------------
 		for (int i = 0; i < num_sources; ++i) {
 			x = i % 4;
