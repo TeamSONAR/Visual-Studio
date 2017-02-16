@@ -8,10 +8,11 @@ f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(91): w
 f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(141): warning C4244: 'initializing': conversion from 'float' to 'std::size_t', possible loss of data
 f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(151): warning C4244: '=': conversion from 'float' to 'short', possible loss of data
 f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(156): warning C4267: 'argument': conversion from 'size_t' to 'ALsizei', possible loss of data
-f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(185): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(195): warning C4267: 'argument': conversion from 'size_t' to 'ALint', possible loss of data
-f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(196): warning C4244: 'argument': conversion from 'double' to 'ALfloat', possible loss of data
-f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(226): warning C4244: 'argument': conversion from 'double' to 'ALfloat', possible loss of data
+f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(189): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(199): warning C4267: 'argument': conversion from 'size_t' to 'ALint', possible loss of data
+f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(200): warning C4244: 'argument': conversion from 'double' to 'ALfloat', possible loss of data
+f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(228): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(234): warning C4244: 'argument': conversion from 'double' to 'ALfloat', possible loss of data
 f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(127): warning C4101: 'zdist': unreferenced local variable
 f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(128): warning C4101: 'xdist': unreferenced local variable
 f:\seniorproject\visual studio\sonarbackend\sonarbackend\sonarbackend.cpp(126): warning C4101: 'angle': unreferenced local variable

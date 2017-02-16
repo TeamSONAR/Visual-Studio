@@ -134,9 +134,9 @@ int main()//int argc, char** argv)
 	al_check_error();
 
 	/* Fill buffer with Sine-Wave */
-	float freq = 220.f;
-	float seconds = 0.25;
-	float sintime = 1;
+	float freq = 180.f;
+	float seconds = 0.5; //was 0.25
+	float sintime = 2; // was 1
 	unsigned sample_rate = 22050;
 	size_t buf_size = seconds * sample_rate;
 
@@ -165,6 +165,10 @@ int main()//int argc, char** argv)
 	//Generate 16 sources
 	ALuint *srclist;
 	srclist = new ALuint[num_sources];
+	int *srcTimeCounters;
+	int *srcRemTime;
+	srcTimeCounters = new int[num_sources];
+	srcRemTime = new int[num_sources];
 	alGenSources(num_sources, srclist);
 	int y;
 	int x;
@@ -192,25 +196,24 @@ int main()//int argc, char** argv)
 		alSourcef(srclist[i], AL_REFERENCE_DISTANCE, 1.0f);
 		alSourcei(srclist[i], AL_SOURCE_RELATIVE, AL_TRUE);
 		alSourcei(srclist[i], AL_LOOPING, AL_TRUE);
-		alSourcei(srclist[i], AL_SAMPLE_OFFSET, (buf_size*i) / num_sources);
+		alSourcei(srclist[i], AL_SAMPLE_OFFSET, (buf_size*i) / (num_sources));
 		alSource3f(srclist[i], AL_POSITION, sourcePos[i][0], x-1.5, sourcePos[i][1]);
 		alSourcePlay(srclist[i]);
+
+		srcTimeCounters[i] = 0;
+		srcRemTime[i] = 0;
 	}
 	//-------------------------------Back to openCV stuff
 
 	namedWindow("Display window", WINDOW_AUTOSIZE);// Create a window for display.
 	imshow("Display window", planes[1]);                   // Show our image inside it.
 
-	while (waitKey(50) < 0) {
+	while (waitKey(100) < 0) {
 
 		while (CheckDMBFlag(PointerToBuf) != 0) { waitKey(10); }
 
 		memcpy(Tacos, ReadDepthMapBufFile(PointerToBuf), 640 * 480 * 4);
 		split(image, planes);
-
-		//else {
-		//	cout << "Could not open or find the image" << std::endl;
-		//}
 		
 		//OpenAL Stuff-----------------------------------
 		for (int i = 0; i < num_sources; ++i) {
@@ -219,11 +222,16 @@ int main()//int argc, char** argv)
 			
 			pointdistnorm = float(pointdist) / 65535;
 			rectangle(planes[1], Point(sourceMatCoords[i][1], sourceMatCoords[i][0]), Point(sourceMatCoords[i][1] + 3, sourceMatCoords[i][0] + 3), Scalar(255));
-			//angle = 3.141592*(0 + ((float(x) + 0.5) / float(4)));
-			//xdist = cos(angle)*pointdistnorm;
-			//zdist = sin(angle)*pointdistnorm;
+
 			printf("%2.2f ", pointdistnorm);
-			alSourcef(srclist[i], AL_GAIN, exp(6.908*(1-pointdistnorm))/1000);
+			
+			srcTimeCounters[i] = pointdistnorm * 10;
+			srcRemTime[i] --;
+			if (srcRemTime[i] <= 0) {
+				alSourcePlay(srclist[i]);
+				srcRemTime[i] = srcTimeCounters[i];
+			}
+			alSourcef(srclist[i], AL_GAIN, exp(6.908*(1-pointdistnorm))/2000);
 		}
 		//End openAL stuff-------------------------------------------
 		printf("\n");
